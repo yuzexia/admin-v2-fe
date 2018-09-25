@@ -1,0 +1,28 @@
+# dependencies
+node_modules
+
+.vscode
+.idea
+
+# logs
+npm-debug.log
+logs
+
+# Nuxt build
+.nuxt
+
+# Nuxt generate
+dist
+
+# Temporary Image
+uploads/*
+
+# config
+config/*
+
+# package-lock.json
+package-lock.json
+
+# yarn.lock
+
+yarn.lock
