@@ -2,9 +2,10 @@
  * @Author: yuze.xia 
  * @Date: 2018-09-21 10:58:36 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-09-25 11:40:29
+ * @Last Modified time: 2018-09-27 14:23:37
  */
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -12,7 +13,7 @@ module.exports = {
   entry: './src/app.jsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'app.js'
+    filename: 'js/app.js'
   },
   module: {
     rules: [
@@ -50,7 +51,21 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              limit: 8192
+              limit: 8192,
+              name: 'resource/[name].[ext]'
+            }
+          }
+        ]
+      },
+      // 字体图标的配置
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              name: 'resource/[name].[ext]'
             }
           }
         ]
@@ -58,9 +73,16 @@ module.exports = {
     ]
   },
   plugins: [
+    // 处理Html文件
     new HtmlWebpackPlugin({
       template: './src/index.html'
     }),
-    new ExtractTextPlugin('index.css')
+    // 独立css文件
+    new ExtractTextPlugin('css/[name].css'),
+    // 提出公共模块
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'common',
+      filename: 'js/base.js'
+    })
   ]
 };
