@@ -2,7 +2,7 @@
  * @Author: yuze.xia 
  * @Date: 2018-09-21 11:03:12 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-09-27 13:24:00
+ * @Last Modified time: 2018-09-28 10:34:53
  */
 
 import React from 'react';
@@ -14,7 +14,8 @@ import './index.scss'
 
 ReactDom.render(
     <div>
-        <h1>Hello, World!</h1>
+        <div>hello world</div>
+        <p>hello, reacteee</p>
         <i className="fa fa-user-circle-o"></i>
     </div>,
     document.getElementById('app')

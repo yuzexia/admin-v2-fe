@@ -2,17 +2,19 @@
  * @Author: yuze.xia 
  * @Date: 2018-09-21 10:58:36 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-09-27 14:23:37
+ * @Last Modified time: 2018-09-28 10:35:44
  */
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: './src/app.jsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/dist/',
     filename: 'js/app.js'
   },
   module: {
@@ -73,6 +75,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new CleanWebpackPlugin(['dist']),
     // 处理Html文件
     new HtmlWebpackPlugin({
       template: './src/index.html'
@@ -84,5 +87,8 @@ module.exports = {
       name: 'common',
       filename: 'js/base.js'
     })
-  ]
+  ],
+  devServer: {
+    port: 8081
+  }
 };
