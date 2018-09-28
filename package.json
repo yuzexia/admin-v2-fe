@@ -5,6 +5,10 @@
   "repository": "https://github.com/yuzexia/admin-v2-fe.git",
   "author": "yuzexia",
   "license": "MIT",
+  "scripts": {
+    "dev": "./node_modules/.bin/webpack-dev-server",
+    "dist": "./node_modules/.bin/webpack -p"
+  },
   "devDependencies": {
     "babel-core": "6.26.0",
     "babel-loader": "7.1.2",
