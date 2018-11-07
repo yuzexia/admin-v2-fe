@@ -2,7 +2,7 @@
  * @Author: yuze.xia 
  * @Date: 2018-09-21 10:58:36 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-01 09:52:59
+ * @Last Modified time: 2018-11-07 11:46:22
  */
 const path = require('path');
 const webpack = require('webpack');
@@ -19,7 +19,8 @@ module.exports = {
   },
   resolve: {
     alias: {
-      page: path.resolve(__dirname, 'src/page')
+      page: path.resolve(__dirname, 'src/page'),
+      component: path.resolve(__dirname, 'src/component')
     }
   },
   module: {
@@ -94,6 +95,10 @@ module.exports = {
     })
   ],
   devServer: {
-    port: 8081
+    port: 8081,
+    // 当访问路径是404时，访问下面设置的路径
+    historyApiFallback: {
+      index: '/dist/index.html'
+    }
   }
 };
