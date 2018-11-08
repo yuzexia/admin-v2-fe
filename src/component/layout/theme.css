@@ -401,7 +401,7 @@ footer p {
 	width: 260px;
 	text-align: left;
 	height: 68px;
-	font-size: 30px;
+	font-size: 28px;
 	font-weight: 700;
 	text-transform: uppercase;
 	line-height: 34px;
@@ -416,7 +416,11 @@ footer p {
 	position: relative;
 	display: inline-block;
 	margin: 0px;
-	padding: 0px;
+	padding: 0px 10px;
+}
+
+.top-navbar .nav > li:hover .dropdown-menu{
+	display:block;
 }
 
 .top-navbar .nav > li > a {
@@ -435,6 +439,7 @@ footer p {
 
 .top-navbar .dropdown-menu {
 	min-width: 230px;
+	top: 97%;
 	border-radius: 0 0 4px 4px;
 }
 
@@ -443,6 +448,9 @@ footer p {
 	background: none;
 }
 
+.dropdown-menu > li > a{
+	cursor:pointer;
+}
 .dropdown-tasks {
 	width: 255px;
 }
@@ -543,6 +551,10 @@ ul.nav.nav-second-level.collapse.in {
 
 .top-navbar .nav > li > a > i {
 	margin-right: 2px;
+}
+.top-navbar .nav > li > a > span{
+	margin-right: 5px; 
+	color:#666;
 }
 
 .top-navbar .navbar-brand:hover {
