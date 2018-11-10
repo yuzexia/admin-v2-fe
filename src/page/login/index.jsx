@@ -2,7 +2,7 @@
  * @Author: yuze.xia 
  * @Date: 2018-11-10 10:58:41 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-10 17:29:58
+ * @Last Modified time: 2018-11-10 17:59:26
  */
 
 import React from 'react';
@@ -57,6 +57,7 @@ class Login extends React.Component {
         // 验证通过
         if (checkResult.status) {
             _user.login(loginInfo).then(res => {
+                _mm.setStorage('userInfo', res);
                 console.log(this.state.redirect);
                 this.props.history.push(this.state.redirect);
             }, errMsg => {

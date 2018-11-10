@@ -2,7 +2,7 @@
  * @Author: yuze.xia 
  * @Date: 2018-11-10 16:12:20 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-10 17:14:45
+ * @Last Modified time: 2018-11-10 18:18:19
  */
 
 import MUtil from 'util/mm.jsx';
@@ -39,6 +39,13 @@ class User {
             status: true,
             msg: '验证通过'
         }
+    }
+    // 退出登录
+    logout() {
+        return _mm.request({
+            type: 'post',
+            url: '/user/logout.do',
+        })
     }
 }
 

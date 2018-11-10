@@ -2,7 +2,7 @@
  * @Author: yuze.xia 
  * @Date: 2018-09-21 10:58:36 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-10 16:18:59
+ * @Last Modified time: 2018-11-10 18:20:52
  */
 const path = require('path');
 const webpack = require('webpack');
@@ -105,6 +105,10 @@ module.exports = {
     },
     proxy: {
       '/manage': {
+        target: 'http://admintest.happymmall.com',
+        changeOrigin: true
+      },
+      '/user/logout.do': {
         target: 'http://admintest.happymmall.com',
         changeOrigin: true
       }

@@ -2,7 +2,7 @@
  * @Author: yuze.xia 
  * @Date: 2018-11-10 10:33:07 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-10 17:03:55
+ * @Last Modified time: 2018-11-10 17:58:31
  */
 
 class MUtil {
@@ -33,7 +33,7 @@ class MUtil {
     doLogin() {
         window.location.href = '/login?redirect' + encodeURIComponent(window.location.pathname);
     }
-    // getUrlParam
+    // 获取url参数
     getUrlParam(name) {
         
         let queryString = window.location.search.split('?')[1] || '',
@@ -43,8 +43,39 @@ class MUtil {
         return result ? decodeURIComponent(result[2]) : null;
 
     }
+    // 处理错误信息
     errorTips(errMsg) {
         alert(errMsg || '好像哪里不对~');
+    }
+    // 设置存储
+    setStorage(name, data) {
+        let dataType = typeof data;
+
+        // json对象
+        if (dataType === 'object') {
+            window.localStorage.setItem(name, JSON.stringify(data));
+        } 
+        // 基本类型
+        else if (['number', 'string', 'boolean'].indexof(dataType) >= 0){
+            window.localStorage.setItem(name, data)
+        }
+        // 其他类型function等
+         else {
+            alert('该类型不能用于本地存储')
+        }
+    }
+    // 获取存储
+    getStorage(name) {
+        let data = window.localStorage.getItem(name);
+        if (data) {
+            return JSON.parse(data);
+        } else {
+            return ''
+        }
+    }
+    // 删除存储
+    removeStorage(name) {
+        window.localStorage.removeItem(name);
     }
 }
 
