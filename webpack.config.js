@@ -2,7 +2,7 @@
  * @Author: yuze.xia 
  * @Date: 2018-09-21 10:58:36 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-10 10:30:07
+ * @Last Modified time: 2018-11-10 16:18:59
  */
 const path = require('path');
 const webpack = require('webpack');
@@ -20,7 +20,9 @@ module.exports = {
   resolve: {
     alias: {
       page: path.resolve(__dirname, 'src/page'),
-      component: path.resolve(__dirname, 'src/component')
+      component: path.resolve(__dirname, 'src/component'),
+      util: path.resolve(__dirname, 'src/util'),
+      service: path.resolve(__dirname, 'src/service')
     }
   },
   module: {
@@ -100,6 +102,12 @@ module.exports = {
     // 当访问路径是404时，访问下面设置的路径
     historyApiFallback: {
       index: '/dist/index.html'
+    },
+    proxy: {
+      '/manage': {
+        target: 'http://admintest.happymmall.com',
+        changeOrigin: true
+      }
     }
   }
 };
