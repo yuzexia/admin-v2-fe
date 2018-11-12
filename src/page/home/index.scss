@@ -1,0 +1,35 @@
+/*
+ * @Author: yuze.xia 
+ * @Date: 2018-11-10 10:13:05 
+ * @Last Modified by:   yuze.xia 
+ * @Last Modified time: 2018-11-10 10:13:05 
+ */
+
+.color-box{
+    display:block;
+    height:160px;
+    padding:20px 0;
+    text-align: center;
+    opacity: 0.9;
+    transition: all 0.3s;
+    &:hover{
+        text-decoration:none;
+        color:#333;
+        opacity: 1;
+        transform: scale(1.08);
+    }
+    &:focus{
+        text-decoration:none;
+    }
+    .count{
+        font-size: 50px;
+        height:80px;
+        line-height:80px;
+    }
+    .desc{
+        font-size: 18px;
+        .fa{
+            margin-right:5px;
+        }
+    }
+}
