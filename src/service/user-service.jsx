@@ -47,6 +47,19 @@ class User {
             url: '/user/logout.do',
         })
     }
+    /**
+     * 获取用户列表
+     * @param pageNum {number} 第几页 
+     */
+    getUserList(pageNum) {
+        return _mm.request({
+            type: 'post',
+            url: '/manage/user/list.do',
+            data: {
+                pageNum
+            }
+        })
+    }
 }
 
 export default User;
