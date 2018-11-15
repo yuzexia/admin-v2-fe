@@ -20,24 +20,62 @@ class UserList extends React.Component {
         this.state = {
             pageNum: 1,
             total: 1,
-            list: []
+            list: [],
+            firstLoading: true
         }
     }
 
     componentWillMount() {
-        this.loadUserList(this.state.pageNum);
+        this.loadUserList();
     }
 
     // 用户列表
-    loadUserList(pageNum) {
-        _user.getUserList(pageNum).then(res => {
-            this.setState(res);
+    loadUserList() {
+        _user.getUserList(this.state.pageNum).then(res => {
+            this.setState(res, () => {
+                this.setState({
+                    firstLoading: false
+                })
+            });
         }, errMsg => {
+            this.setState({
+                list: []
+            })
             _mm.errorTips(errMsg);
+        })
+    }
+    // 分页
+    changePageList(pageNum) {
+        this.setState({
+            pageNum: pageNum
+        }, () => {
+            this.loadUserList();
         })
     }
 
     render() {
+        let listBody = this.state.list.map((user, index) => {
+            return (
+                <tr key={index}>
+                    <td>{user.id}</td>
+                    <td>{user.username}</td>
+                    <td>{user.email}</td>
+                    <td>{user.phone}</td>
+                    <td>{new Date(user.createTime).toLocaleString()}</td>
+                </tr>
+            );
+        });
+        let listError = (
+            <tr>
+                <td colSpan="5" className="text-center">
+                {
+                    this.state.firstLoading ? '数据加载中...' : '没有找到相应的结果～'
+                }
+                </td>
+            </tr>
+        )
+        let tableBody = this.state.list.length > 0 ? listBody : listError;
+
         return (
             <div id="page-wrapper">
                 <PageTitle title="用户列表"/>
@@ -55,26 +93,15 @@ class UserList extends React.Component {
                             </thead>
                             <tbody>
                                 {
-                                    this.state.list.map((user, index) => {
-                                        return (
-                                            <tr key={index}>
-                                                <td>{user.id}</td>
-                                                <td>{user.username}</td>
-                                                <td>{user.email}</td>
-                                                <td>{user.phone}</td>
-                                                <td>{user.createTime}</td>
-                                            </tr>
-                                        );
-                                    })
+                                    tableBody
                                 }
-                                
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <Pagination current={this.state.pageNum} 
                             total={this.state.total} 
-                            onChange={(pageNum) => {this.loadUserList(pageNum)}}/>
+                            onChange={(pageNum) => {this.changePageList(pageNum)}}/>
             </div>
         )
     }

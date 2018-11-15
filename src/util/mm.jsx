@@ -31,7 +31,7 @@ class MUtil {
     }
     // 跳转到登录页面 && 把当前页路径带过去
     doLogin() {
-        window.location.href = '/login?redirect' + encodeURIComponent(window.location.pathname);
+        window.location.href = '/login?redirect=' + encodeURIComponent(window.location.pathname);
     }
     // 获取url参数
     getUrlParam(name) {
