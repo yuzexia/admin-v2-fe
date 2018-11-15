@@ -2,12 +2,17 @@
  * @Author: yuze.xia 
  * @Date: 2018-11-01 09:45:04 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-10 10:22:04
+ * @Last Modified time: 2018-11-15 10:56:52
  */
 
 import React from 'react';
 import {Link} from 'react-router-dom';
 import PageTitle from 'component/page-title/index.jsx';
+
+import MUtil from 'util/mm.jsx';
+import Statistic from 'service/statistic-service.jsx';
+const _mm = new MUtil();
+const _statistic = new Statistic();
 
 import './index.scss';
 
@@ -22,8 +27,17 @@ class Home extends React.Component{
         }
     }
 
+    componentWillMount() {
+        this.loadCount();
+    }
+
     loadCount() {
-        
+        _statistic.getHomeCount().then(res => {
+            console.log(res);
+            this.setState(res);
+        }, errMsg => {
+            _mm.errorTips(errMsg);
+        })
     }
 
     render() {
@@ -41,20 +55,20 @@ class Home extends React.Component{
                         </Link>
                     </div>
                     <div className="col-md-4">
-                        <Link to="/user" className="color-box green">
-                            <p className="count">{this.state.userCount}</p>
+                        <Link to="/product" className="color-box green">
+                            <p className="count">{this.state.productCount}</p>
                             <p className="desc">
                                 <i className="fa fa-list"></i>
-                                <span>用户总数</span>
+                                <span>商品总数</span>
                             </p>
                         </Link>
                     </div>
                     <div className="col-md-4">
-                        <Link to="/user" className="color-box blue">
-                            <p className="count">{this.state.userCount}</p>
+                        <Link to="/order" className="color-box blue">
+                            <p className="count">{this.state.orderCount}</p>
                             <p className="desc">
                                 <i className="fa fa-check-square-o"></i>
-                                <span>用户总数</span>
+                                <span>订单总数</span>
                             </p>
                         </Link>
                     </div>
