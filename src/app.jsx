@@ -2,7 +2,7 @@
  * @Author: yuze.xia 
  * @Date: 2018-09-21 11:03:12 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-10 11:04:49
+ * @Last Modified time: 2018-11-15 11:14:00
  */
 
 import React from 'react';
@@ -14,6 +14,7 @@ import Layout from 'component/layout/index.jsx';
 // 页面
 import Home from 'page/home/index.jsx'; 
 import Login from 'page/login/index.jsx';
+import ErrorPage from 'page/error/index.jsx';
 
 import './index.css';
 import './index.scss';
@@ -30,6 +31,7 @@ class App extends React.Component {
                                 <Route exact path="/" component={Home}/>
                                 <Route path="/product" component={Home}/>
                                 <Route path="/product-category" component={Home}/>
+                                <Route component={ErrorPage}/>
                             </Switch>
                         </Layout>
                     )} />
