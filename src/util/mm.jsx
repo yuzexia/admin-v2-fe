@@ -2,7 +2,7 @@
  * @Author: yuze.xia 
  * @Date: 2018-11-10 10:33:07 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-10 17:58:31
+ * @Last Modified time: 2018-11-16 15:16:52
  */
 
 class MUtil {
@@ -42,6 +42,10 @@ class MUtil {
         
         return result ? decodeURIComponent(result[2]) : null;
 
+    }
+    // 处理成功信息
+    successTips(successMsg) {
+        alert(successMsg || '处理成功！');
     }
     // 处理错误信息
     errorTips(errMsg) {

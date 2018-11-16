@@ -2,7 +2,7 @@
  * @Author: yuze.xia 
  * @Date: 2018-11-16 10:51:21 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-16 12:42:56
+ * @Last Modified time: 2018-11-16 15:07:41
  */
 import React from 'react';
 
@@ -41,7 +41,13 @@ class TableList extends React.Component{
                             <tr>
                                 {
                                     tableHeads.map(
-                                        (tableHead, index) => <th key={index}>{tableHead}</th>
+                                        (tableHead, index) => {
+                                            if (typeof tableHead === 'object') {
+                                                return <th key={index} width={tableHead.width}>{tableHead.name}</th>
+                                            } else if (typeof tableHead === 'string') {
+                                                return <th key={index}>{tableHead}</th>
+                                            }
+                                        }
                                     )
                                 }
                             </tr>
