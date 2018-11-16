@@ -1,43 +1,40 @@
 /*
  * @Author: yuze.xia 
- * @Date: 2018-11-15 15:05:01 
+ * @Date: 2018-11-16 10:04:44 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-16 12:44:33
+ * @Last Modified time: 2018-11-16 14:58:02
  */
-
 import React from 'react';
 import PageTitle from 'component/page-title/index.jsx';
 import TableList from 'util/table-list/index.jsx';
 import Pagination from 'util/pagination/index.jsx';
 
-import User from 'service/user-service.jsx';
+import {Link} from 'react-router-dom';
+
+import Product from 'service/product-service.jsx';
 import MUtil from 'util/mm.jsx';
 const _mm = new MUtil();
-const _user = new User();
+const _product = new Product();
 
-class UserList extends React.Component {
+class ProductList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             pageNum: 1,
-            total: 1,
-            list: [],
-            firstLoading: true
+            list: []
         }
     }
 
     componentWillMount() {
-        this.loadUserList();
+        this.loadProductList();
     }
 
     // 用户列表
-    loadUserList() {
-        _user.getUserList(this.state.pageNum).then(res => {
+    loadProductList() {
+        _product.getProductList(this.state.pageNum).then(res => {
+            console.log(res);
             this.setState(res);
         }, errMsg => {
-            this.setState({
-                list: []
-            })
             _mm.errorTips(errMsg);
         })
     }
@@ -46,24 +43,42 @@ class UserList extends React.Component {
         this.setState({
             pageNum: pageNum
         }, () => {
-            this.loadUserList();
+            this.loadProductList();
         })
     }
 
     render() {
-        let tableHeads = ['ID', '用户名', '邮箱', '电话', '注册时间'];
+        let tableHeads = ['商品ID', '商品信息', '价格', '状态', '操作'];
 
-        let listBody = this.state.list.map((user, index) => {
+        let listBody = this.state.list.map((product, index) => {
             return (
                 <tr key={index}>
-                    <td>{user.id}</td>
-                    <td>{user.username}</td>
-                    <td>{user.email}</td>
-                    <td>{user.phone}</td>
-                    <td>{new Date(user.createTime).toLocaleString()}</td>
+                    <td>{product.id}</td>
+                    <td>
+                        <p>{product.name}</p>
+                        <p>{product.subtitle}</p>
+                    </td>
+                    <td>¥{product.price}</td>
+                    <td>
+                        <span>{product.status == 1 ? '在售' : '已下架'}</span>
+                    </td>
+                    <td>
+                        <Link to={`/product/detail/${product.id}`}>查看详情</Link>
+                        <Link to={`/product/save/${product.id}`}>编辑</Link>
+                    </td>
                 </tr>
             );
         });
+        // let listError = (
+        //     <tr>
+        //         <td colSpan="5" className="text-center">
+        //         {
+        //             this.state.firstLoading ? '数据加载中...' : '没有找到相应的结果～'
+        //         }
+        //         </td>
+        //     </tr>
+        // )
+        // let tableBody = this.state.list.length > 0 ? listBody : listError;
 
         return (
             <div id="page-wrapper">
@@ -73,6 +88,7 @@ class UserList extends React.Component {
                         listBody
                     }
                 </TableList>
+
                 {/* <div className="row">
                     <div className="col-md-12">
                         <table className="table table-striped table-bordered">
@@ -101,4 +117,4 @@ class UserList extends React.Component {
     }
 }
 
-export default UserList;
+export default ProductList;
