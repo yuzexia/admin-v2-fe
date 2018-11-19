@@ -2,10 +2,11 @@
  * @Author: yuze.xia 
  * @Date: 2018-11-16 10:04:44 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-16 15:33:44
+ * @Last Modified time: 2018-11-16 16:46:57
  */
 import React from 'react';
 import PageTitle from 'component/page-title/index.jsx';
+import ListSearch from 'page/product/index/index-list-search.jsx';
 import TableList from 'util/table-list/index.jsx';
 import Pagination from 'util/pagination/index.jsx';
 
@@ -23,7 +24,8 @@ class ProductList extends React.Component {
         super(props);
         this.state = {
             pageNum: 1,
-            list: []
+            list: [],
+            listType: 'list'
         }
     }
 
@@ -33,8 +35,15 @@ class ProductList extends React.Component {
 
     // 用户列表
     loadProductList() {
-        _product.getProductList(this.state.pageNum).then(res => {
-            console.log(res);
+        let listParam = {}
+        listParam.pageNum = this.state.pageNum;
+        listParam.listType = this.state.listType;
+        // 如若是搜索的话，需要传入搜索类型与搜索关键词
+        if (this.state.listType === 'search') {
+            listParam.searchType = this.state.searchType;
+            listParam.searchKeyword = this.state.searchKeyword;
+        }
+        _product.getProductList(listParam).then(res => {
             this.setState(res);
         }, errMsg => {
             this.setState({
@@ -64,6 +73,18 @@ class ProductList extends React.Component {
                 _mm.errorTips(errMsg);
             })
         }
+    }
+    // 搜索事件
+    onSearch(searchType, searchKeyword) {
+        let listType = searchKeyword === '' ? 'list' : 'search';
+        this.setState({
+            pageNum: 1,
+            listType,
+            searchType,
+            searchKeyword
+        }, () => {
+            this.loadProductList();
+        })
     }
     render() {
         let tableHeads = [
@@ -102,6 +123,7 @@ class ProductList extends React.Component {
         return (
             <div id="page-wrapper">
                 <PageTitle title="用户列表"/>
+                <ListSearch onSearch={(searchType, searchKeyword) => {this.onSearch(searchType, searchKeyword)}}/>
                 <TableList tableHeads={tableHeads}>
                     {
                         listBody

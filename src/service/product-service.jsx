@@ -13,13 +13,23 @@ class Product {
      * 获取产品列表
      * @param {string} pageNum 第几页 
      */
-    getProductList(pageNum) {
+    getProductList(listParam) {
+        let data = {},
+            url = '';
+        // 当listType为list时，参数只需要pageNum
+        // 当listType为search时，参数为pageNum与productName:value或productId: value
+        data.pageNum = listParam.pageNum;
+        if (listParam.listType === 'list') {
+            url = '/manage/product/list.do';
+        } else if (listParam.listType === 'search') {
+            url = '/manage/product/search.do';
+            data[listParam.searchType] = listParam.searchKeyword;
+        }
+        // 请求接口
         return _mm.request({
             type: 'post',
-            url: '/manage/product/list.do',
-            data: {
-                pageNum
-            }
+            url,
+            data
         })
     }
     /**
