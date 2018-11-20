@@ -2,7 +2,7 @@
  * @Author: yuze.xia 
  * @Date: 2018-11-16 10:15:40 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-16 15:33:56
+ * @Last Modified time: 2018-11-19 16:07:03
  */
 import React from 'react';
 import MUtil from 'util/mm.jsx';
@@ -41,6 +41,24 @@ class Product {
             type: 'post',
             url: '/manage/product/set_sale_status.do',
             data: productInfo
+        })
+    }
+
+
+    /**
+     * 品类相关接口
+     */
+    /**
+     * 
+     * @param {number} firstCategoryId 
+     */
+    getCategoryList(parentCategoryId){
+        return _mm.request({
+            type: 'post',
+            url: '/manage/category/get_category.do',
+            data: {
+                categoryId: parentCategoryId || 0
+            }
         })
     }
 }
