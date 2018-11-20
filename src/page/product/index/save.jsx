@@ -2,7 +2,7 @@
  * @Author: yuze.xia 
  * @Date: 2018-11-19 11:40:08 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-20 18:00:05
+ * @Last Modified time: 2018-11-20 20:04:39
  */
 import React from 'react';
 import {Link} from 'react-router-dom';
@@ -44,6 +44,18 @@ class ProductSave extends React.Component {
     // 图片上传失败
     onUploadError(errMsg) {
         _mm.errorTips(errMsg);
+    }
+    // 删除图片
+    onImageDelete(e) {
+        // let index = e.target.index, // 这种方式无法获取到index值
+        let index = e.target.getAttribute('index'),
+            subImages = this.state.subImages;
+        console.log(index);
+        subImages.splice(index, 1);
+        this.setState({
+            subImages
+        })
+
     }
 
     render() {
@@ -110,12 +122,13 @@ class ProductSave extends React.Component {
                                             return (
                                                 <div className="img-con" key={index}>
                                                     <img className="img" src={image.url}/>
+                                                    <i className="fa fa-close" index={index} onClick={(e) => this.onImageDelete(e)}></i>
                                                 </div>
                                             )
                                         }) : (<div>请上传图片</div>)
                                     }
                                 </div>
-                                <div className="col-md-10 col-md-offset-2 margin-top10">
+                                <div className="col-md-10 col-md-offset-2 margin-top15">
                                     <FileUploader 
                                         onSuccess={(res) => {
                                             this.onUploadSuccess(res)
