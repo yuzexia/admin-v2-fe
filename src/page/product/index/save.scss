@@ -1,0 +1,21 @@
+/*
+ * @Author: yuze.xia 
+ * @Date: 2018-11-20 17:42:00 
+ * @Last Modified by: yuze.xia
+ * @Last Modified time: 2018-11-20 18:03:51
+ */
+.img-con{
+    width:96px;
+    height:96px;
+    margin-right:10px;
+    float:left;
+    border:1px solid #ccc;
+    .img{
+        display:block;
+        width:100%;
+        transform: translateY(50%);
+    }
+}
+.margin-top10{
+    margin-top:10px;
+}
