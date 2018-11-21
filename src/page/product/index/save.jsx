@@ -2,13 +2,14 @@
  * @Author: yuze.xia 
  * @Date: 2018-11-19 11:40:08 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-20 20:15:19
+ * @Last Modified time: 2018-11-21 19:33:25
  */
 import React from 'react';
 import {Link} from 'react-router-dom';
 import PageTitle from 'component/page-title/index.jsx';
 import CategorySelector from 'page/product/index/category-selector.jsx';
 import FileUploader from 'util/file-upload/index.jsx';
+import RichEditor from 'util/rich-editor/index.jsx';
 
 import './save.scss';
 
@@ -57,7 +58,12 @@ class ProductSave extends React.Component {
         })
 
     }
-
+    // 获取富文本编辑器的内容
+    onDetailValueChange(value) {
+        this.setState({
+            detail: value
+        })
+    }
     render() {
         return (
             <div id="page-wrapper">
@@ -131,7 +137,7 @@ class ProductSave extends React.Component {
                             <div className="form-group">
                                 <label className="col-md-2 control-label">商品详情</label>
                                 <div className="col-md-10">
-                                    <input type="text" className="form-control" placeholder="请输入商品描述" />
+                                    <RichEditor onValueChange={(value) => {this.onDetailValueChange(value);}}/>
                                 </div>
                             </div>
                             <div className="form-group">
