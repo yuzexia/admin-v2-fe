@@ -2,7 +2,7 @@
  * @Author: yuze.xia 
  * @Date: 2018-11-19 11:40:08 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-20 20:04:39
+ * @Last Modified time: 2018-11-20 20:15:19
  */
 import React from 'react';
 import {Link} from 'react-router-dom';
@@ -59,17 +59,6 @@ class ProductSave extends React.Component {
     }
 
     render() {
-        // 接口字段
-        // categoryId=1
-        // name=三星洗衣机
-        // subtitle=三星大促销
-        // mainImage=sss.jpg
-        // subImages=test.jpg
-        // detail=detailtext
-        // price=1000
-        // stock=100
-        // status=1
-        // id=3
         return (
             <div id="page-wrapper">
                 <PageTitle title="添加商品"/>
