@@ -2,7 +2,7 @@
  * @Author: yuze.xia 
  * @Date: 2018-11-16 10:15:40 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-19 16:07:03
+ * @Last Modified time: 2018-11-22 10:00:31
  */
 import React from 'react';
 import MUtil from 'util/mm.jsx';
@@ -43,7 +43,63 @@ class Product {
             data: productInfo
         })
     }
-
+    /**
+     * 表单验证
+     * @param {object} product 
+     */
+    checkProduct(product) {
+        let result = {
+            status: true,
+            msg: '验证通过'
+        }
+        // 判断商品名是否为空
+        if (typeof product.name !== 'string' || product.name.length <= 0) {
+            return {
+                status: false,
+                msg: '商品名称不能为空！'
+            }
+        }
+        // 判断描述是否为空
+        if (typeof product.subtitle !== 'string' || product.subtitle.length <= 0) {
+            return {
+                status: false,
+                msg: '商品描述不能为空！'
+            }
+        }
+        // 判断品类ID
+        if (typeof product.categoryId !== 'number' || !(product.categoryId > 0)) {
+            return {
+                status: false,
+                msg: '请选择商品品类！'
+            }
+        }
+        // 判断价格为数字，且大于0
+        if (typeof product.price !== 'number' || !(product.price >= 0)) {
+            return {
+                status: false,
+                msg: '请输入正确的价格！'
+            }
+        }
+        // 判断库存为数字，且大于或等于0
+        if (typeof product.stock !== 'number' || !(product.stock >= 0)) {
+            return {
+                status: false,
+                msg: '请输入正确的库存数量！'
+            }
+        }
+        return result;
+    }
+    /**
+     * 表单提交
+     * @param {*} parentCategoryId 
+     */
+    saveProduct(product) {
+        return _mm.request({
+            type: 'post',
+            url: '/manage/product/save.do',
+            data: product
+        })
+    }
 
     /**
      * 品类相关接口
