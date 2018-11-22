@@ -2,7 +2,7 @@
  * @Author: yuze.xia 
  * @Date: 2018-11-19 15:04:55 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-22 11:27:40
+ * @Last Modified time: 2018-11-22 19:34:25
  */
 import React from 'react';
 
@@ -26,7 +26,7 @@ class CategorySelector extends React.Component {
     }
 
     componentDidMount() {
-        this.loadFirstCategory()
+        this.loadFirstCategory();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -75,6 +75,7 @@ class CategorySelector extends React.Component {
     }
     // 选择一级品类
     onFirstCategoryChange(e) {
+        if (this.props.readOnly) return;
         let newValue = e.target.value;
         // 更新state firstCategoryId时，将secondCategoryId，secondCategoryList重置为0与[]
         this.setState({
@@ -88,6 +89,7 @@ class CategorySelector extends React.Component {
     }
     // 选择二级品类
     onSecondCategoryChange(e){
+        if (this.props.readOnly) return;
         let newValue = e.target.value;
         this.setState({
             secondCategoryId: newValue,
@@ -112,6 +114,7 @@ class CategorySelector extends React.Component {
         return (
             <div className="col-md-10">
                 <select type="text" 
+                        readOnly={this.props.readOnly}
                         className="form-control cate-select"
                         value={this.state.firstCategoryId}
                         onChange={(e) => {this.onFirstCategoryChange(e)}}
@@ -126,6 +129,7 @@ class CategorySelector extends React.Component {
                 {
                     this.state.secondCategoryList.length ?
                     (<select type="text" 
+                             readOnly={this.props.readOnly}
                              className="form-control cate-select"
                              value={this.state.secondCategoryId}
                              onChange={(e) => {this.onSecondCategoryChange(e)}}>

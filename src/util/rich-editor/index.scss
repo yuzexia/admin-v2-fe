@@ -1,9 +1,12 @@
 /*
  * @Author: yuze.xia 
  * @Date: 2018-11-22 12:59:25 
- * @Last Modified by:   yuze.xia 
- * @Last Modified time: 2018-11-22 12:59:25 
+ * @Last Modified by: yuze.xia
+ * @Last Modified time: 2018-11-22 19:40:58
  */
 .simditor-body{
     overflow:auto;
+    img{
+        max-width: 100%;
+    }
 }
