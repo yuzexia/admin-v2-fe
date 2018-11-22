@@ -2,13 +2,13 @@
  * @Author: yuze.xia 
  * @Date: 2018-11-20 20:16:17 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-21 19:34:38
+ * @Last Modified time: 2018-11-22 12:59:57
  */
 import React from 'react';
 import Simditor from 'simditor';
 
 import 'simditor/styles/simditor.scss';
-
+import './index.scss';
 // 通用的富文本编辑器，依赖jquery
 class RichEditor extends React.Component {
     constructor(props) {
@@ -16,6 +16,14 @@ class RichEditor extends React.Component {
     }
     componentDidMount() {
         this.loadEditor();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log(this.props.detail);
+        console.log('---------', nextProps);
+        if (this.props.defaultDetail !== nextProps.defaultDetail) {
+            this.simditor.setValue(nextProps.defaultDetail);
+        }
     }
     // 初始化editor
     loadEditor() {

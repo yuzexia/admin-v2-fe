@@ -2,7 +2,7 @@
  * @Author: yuze.xia 
  * @Date: 2018-11-16 10:15:40 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-22 10:00:31
+ * @Last Modified time: 2018-11-22 10:18:54
  */
 import React from 'react';
 import MUtil from 'util/mm.jsx';
@@ -100,7 +100,19 @@ class Product {
             data: product
         })
     }
-
+    /**
+     * 获取单个商品详情
+     * @param {number} productId 
+     */
+    getProduct(productId) {
+        return _mm.request({
+            type: 'post',
+            url: '/manage/product/detail.do',
+            data: {
+                productId
+            }
+        })
+    }
     /**
      * 品类相关接口
      */
