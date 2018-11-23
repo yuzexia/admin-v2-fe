@@ -2,10 +2,9 @@
  * @Author: yuze.xia 
  * @Date: 2018-11-19 11:40:08 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-22 13:01:26
+ * @Last Modified time: 2018-11-23 09:26:28
  */
 import React from 'react';
-import {Link} from 'react-router-dom';
 import PageTitle from 'component/page-title/index.jsx';
 import CategorySelector from 'page/product/index/category-selector.jsx';
 import FileUploader from 'util/file-upload/index.jsx';
@@ -139,7 +138,7 @@ class ProductSave extends React.Component {
     render() {
         return (
             <div id="page-wrapper">
-                <PageTitle title="添加商品"/>
+                <PageTitle title={this.props.id ? "编辑商品" : "添加商品"}/>
                 <div className="row">
                     <div className="col-md-12">
                         <div className="form-horizontal">

@@ -2,7 +2,7 @@
  * @Author: yuze.xia 
  * @Date: 2018-11-16 10:04:44 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-16 16:46:57
+ * @Last Modified time: 2018-11-23 09:27:09
  */
 import React from 'react';
 import PageTitle from 'component/page-title/index.jsx';
@@ -122,7 +122,7 @@ class ProductList extends React.Component {
 
         return (
             <div id="page-wrapper">
-                <PageTitle title="用户列表">
+                <PageTitle title="商品列表">
                     <div className="page-header-right">
                         <Link to="/product/save" className="btn btn-primary">
                             <i className="fa fa-plus"></i>

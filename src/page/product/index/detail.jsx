@@ -2,7 +2,7 @@
  * @Author: yuze.xia 
  * @Date: 2018-11-22 19:21:23 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-22 19:39:07
+ * @Last Modified time: 2018-11-23 09:26:55
  */
 import React from 'react';
 import PageTitle from 'component/page-title/index.jsx';
@@ -136,7 +136,7 @@ class ProductDetail extends React.Component {
     render() {
         return (
             <div id="page-wrapper">
-                <PageTitle title="添加商品"/>
+                <PageTitle title="商品详情"/>
                 <div className="row">
                     <div className="col-md-12">
                         <div className="form-horizontal">
