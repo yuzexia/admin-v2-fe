@@ -2,7 +2,7 @@
  * @Author: yuze.xia 
  * @Date: 2018-11-16 10:15:40 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-22 10:18:54
+ * @Last Modified time: 2018-11-27 10:56:58
  */
 import React from 'react';
 import MUtil from 'util/mm.jsx';
@@ -117,7 +117,7 @@ class Product {
      * 品类相关接口
      */
     /**
-     * 
+     * 根据父品类id获取品类列表
      * @param {number} firstCategoryId 
      */
     getCategoryList(parentCategoryId){
@@ -127,6 +127,27 @@ class Product {
             data: {
                 categoryId: parentCategoryId || 0
             }
+        })
+    }
+    /**
+     * 新增品类
+     * @param {object} category {parentId, categoryName}
+     */
+    saveCategory(category) {
+        return _mm.request({
+            type: 'post',
+            url: '/manage/category/add_category.do',
+            data: category
+        })
+    }
+    /**
+     * 修改品类名称
+     */
+    updateCategoryName(category) {
+        return _mm.request({
+            type: 'post',
+            url: '/manage/category/set_category_name.do',
+            data: category
         })
     }
 }

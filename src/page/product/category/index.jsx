@@ -2,7 +2,7 @@
  * @Author: yuze.xia 
  * @Date: 2018-11-16 09:52:41 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-23 09:17:16
+ * @Last Modified time: 2018-11-27 10:33:07
  */
 import React from 'react';
 import PageTitle from 'component/page-title/index.jsx';
@@ -93,7 +93,14 @@ class CategoryList extends React.Component {
 
         return (
             <div id="page-wrapper">
-                <PageTitle title="品类列表"/>
+                <PageTitle title="品类列表">
+                    <div className="page-header-right">
+                        <Link to="/product-category/add" className="btn btn-primary">
+                            <i className="fa fa-plus"></i>
+                            <span>添加品类</span>
+                        </Link>
+                    </div>
+                </PageTitle>
                 <div className="row">
                     <div className="col-md-12">
                         <p>父品类ID: {this.state.parentCategoryId}</p>
