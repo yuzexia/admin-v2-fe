@@ -2,7 +2,7 @@
  * @Author: yuze.xia 
  * @Date: 2018-11-16 10:15:40 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-27 10:56:58
+ * @Last Modified time: 2018-11-27 10:58:44
  */
 import React from 'react';
 import MUtil from 'util/mm.jsx';
@@ -142,6 +142,7 @@ class Product {
     }
     /**
      * 修改品类名称
+     * @param {object} category {categoryId, categoryName}
      */
     updateCategoryName(category) {
         return _mm.request({
