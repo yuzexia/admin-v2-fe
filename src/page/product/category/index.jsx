@@ -8,10 +8,12 @@ import React from 'react';
 import PageTitle from 'component/page-title/index.jsx';
 import TableList from 'util/table-list/index.jsx';
 
-import User from 'service/user-service.jsx';
+import {Link} from 'react-router-dom';
+
+import Product from 'service/product-service.jsx';
 import MUtil from 'util/mm.jsx';
 const _mm = new MUtil();
-const _user = new User();
+const _product = new Product();
 
 class CategoryList extends React.Component {
     constructor(props) {
@@ -25,11 +27,25 @@ class CategoryList extends React.Component {
     componentWillMount() {
         this.loadCategoryList();
     }
+    componentDidUpdate(prevProps, prevState) {
+        let oldPath = prevProps.location.pathname,
+            curPath = this.props.location.pathname,
+            curId = this.props.match.params.categoryId || 0;
+        if (oldPath !== curPath) {
+            this.setState({
+                parentCategoryId: curId
+            }, () => {
+                this.loadCategoryList();
+            })
+        }
+    }
 
-    // 用户列表
+    // 品类列表
     loadCategoryList() {
-        _user.getCategoryList(this.state.parentCategoryId).then(res => {
-            this.setState(res);
+        _product.getCategoryList(this.state.parentCategoryId).then(res => {
+            this.setState({
+                list: res
+            });
         }, errMsg => {
             this.setState({
                 list: []
@@ -37,6 +53,22 @@ class CategoryList extends React.Component {
             _mm.errorTips(errMsg);
         })
     }
+    // 操作品类
+    onUpdateName(categoryId, categoryName) {
+        let newName = window.prompt('请输入新的品类名称', categoryName);
+        if (newName) {
+            _product.updateCategoryName({
+                categoryId,
+                categoryName: newName
+            }).then(res => {
+                _mm.successTips(res);
+                this.loadCategoryList();
+            }, errMsg => {
+                _mm.errorTips(errMsg);
+            })
+        }
+    }
+
     render() {
         let tableHeads = ['品类ID', '品类名称', '操作'];
 
@@ -44,8 +76,17 @@ class CategoryList extends React.Component {
             return (
                 <tr key={index}>
                     <td>{category.id}</td>
-                    <td>{category.username}</td>
-                    <td>{category.email}</td>
+                    <td>{category.name}</td>
+                    <td>
+                        <a className="opear"
+                           onClick={(e) => {this.onUpdateName(category.id, category.name)}}
+                        >修改品类名称</a>
+                        {
+                            category.parentId === 0 
+                            ? <Link to={`/product-category/index/${category.id}`}>查看子品类</Link>
+                            : null
+                        }
+                    </td>
                 </tr>
             );
         });
@@ -53,6 +94,11 @@ class CategoryList extends React.Component {
         return (
             <div id="page-wrapper">
                 <PageTitle title="品类列表"/>
+                <div className="row">
+                    <div className="col-md-12">
+                        <p>父品类ID: {this.state.parentCategoryId}</p>
+                    </div>
+                </div>
                 <TableList tableHeads={tableHeads}>
                     {
                         listBody
