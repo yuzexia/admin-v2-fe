@@ -2,7 +2,7 @@
  * @Author: yuze.xia 
  * @Date: 2018-09-21 10:58:36 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-10 18:20:52
+ * @Last Modified time: 2018-11-28 16:57:16
  */
 const path = require('path');
 const webpack = require('webpack');
@@ -10,11 +10,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+let WEBPACK_ENV = process.env.WEBPACK_ENV || 'dev';
+console.log('---------- ', WEBPACK_ENV);
 module.exports = {
   entry: './src/app.jsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/dist/',
+    publicPath: WEBPACK_ENV === 'dev' ? '/dist/': '//s.jianliwu.com/admin-v2-fe/',
     filename: 'js/app.js'
   },
   resolve: {
