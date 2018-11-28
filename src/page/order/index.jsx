@@ -2,7 +2,7 @@
  * @Author: yuze.xia 
  * @Date: 2018-11-27 18:39:20 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-28 09:14:02
+ * @Last Modified time: 2018-11-28 09:19:04
  */
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -35,10 +35,11 @@ class OrderList extends React.Component{
         let listParam = {};
         if (this.state.listType === 'list') {
             listParam.pageNum = this.state.pageNum;
-            listParam.listType = 'list'
+            listParam.listType = 'list';
         } else if (this.state.listType === 'search') {
-            listParam.orderNo = this.state.orderNo
-            listParam.listType = 'search'
+            listParam.orderNo = this.state.orderNo;
+            listParam.pageNum = this.state.pageNum;
+            listParam.listType = 'search';
         }
         _order.getOrderList(listParam)
         .then(res => {
@@ -60,8 +61,10 @@ class OrderList extends React.Component{
     }
     // 搜索
     onSearch(orderNumber) {
+        let listType = orderNumber === '' ? 'list' : 'search';
         this.setState({
-            listType: 'search',
+            listType,
+            pageNum: 1,
             orderNo: orderNumber
         }, () => {
             this.loadOrderList();
