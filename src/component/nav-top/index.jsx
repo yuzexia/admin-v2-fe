@@ -2,7 +2,7 @@
  * @Author: yuze.xia 
  * @Date: 2018-11-07 15:42:16 
  * @Last Modified by: yuze.xia
- * @Last Modified time: 2018-11-10 18:24:01
+ * @Last Modified time: 2018-11-28 11:35:14
  */
 
 import React from 'react';
@@ -34,7 +34,7 @@ class NavTop extends React.Component{
         return (
             <div className="navbar navbar-default top-navbar">
                 <div className="navbar-header">
-                    <Link className="navbar-brand" to="index.html"><b>HAPPY</b> MMALL</Link>
+                    <Link className="navbar-brand" to="/"><b>HAPPY</b> MMALL</Link>
                 </div>
                 <ul className="nav navbar-top-links navbar-right">
                     <li className="dropdown">
